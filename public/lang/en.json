@@ -1,0 +1,164 @@
+{
+  "app": {
+    "title": "Sunshine",
+    "general": {
+      "menu": "Menu",
+      "error": "Error",
+      "close": "Close",
+      "link": "Link",
+      "cancel": "Cancel",
+      "save": "Save"
+    },
+    "subtitle": {
+      "search-results": "Search results: {term}"
+    },
+    "login": {
+      "forbidden": "Access forbidden 🤕",
+      "connect": "Go to login page",
+      "title": "Welcome to Sunshine☀️​😎",
+      "success": "Successfully logged in!",
+      "subtitle": "Please enter your credentials",
+      "login": "Login",
+      "login-placeholder" : "Login",
+      "password": "Password",
+      "password-placeholder": "Password"
+    },
+    "tabs" : {
+      "branches": "Branches",
+      "reporting": "Reporting"
+    },
+    "navbar": {
+      "usermenu": {
+        "profile": "Profile",
+        "logout": "Logout"
+      },
+      "projectmenu": {
+        "header": "{count, plural, =0 {Project (none)} one {Project (#)} other {Projects (#)}}",
+        "add-project": "Add project &hellip;",
+        "refresh": "Refresh projects list",
+        "confirm": "Project list was refreshed"
+      },
+      "changesets": "Changesets ",
+      "tools": "Tools",
+      "toolsmenu": {
+        "credentials": "Credentials",
+        "eventlog": "Event log",
+        "users": "Users and teams"
+      },
+      "reporting-source": "Reporting source",
+      "reportingmenu": {
+        "noproject": "No project is currently selected",
+        "global-project": "Global project global",
+        "changeset-subtitle": "Changesets ({count})",
+        "nochangeset-1": "No existing changeset :",
+        "nochangeset-2": "You can add one on the reference commit add form."
+      }
+    },
+    "scmbrowser": {
+      "newproject": {
+        "title": "Ajouter new project",
+        "subtitle": "Provide here data about the new project",
+        "name": "Name:",
+        "name-tip": "Project name is free, and is used to uniquely identify it on the plateform.",
+        "version": "Version :",
+        "button": "Add project"
+    },
+    "newbranch": {
+      "title": "Register a new branch",
+      "subtitle": "Provide here detail regarding the new branch. It must exist on target repository.",
+      "key": "Branch key:",
+      "key-tip": "Free identifier, must be unique in the project.",
+      "repotype": "Repository type:",
+      "url": "Repository URL or path, containing branch:",
+      "url-placeholder": "https://github.com/fredissy/sunshine.git",
+      "credentials": "Credentials:",
+      "branch-name": "Branch name in remote repository :",
+      "branch-name-tip": "Usually master or dev.",
+      "issue-number": "Issue number format:",
+      "issue-number-tip": "Regex to be applied on comments to extract identifier.",
+      "button": "Add branch"
+    },
+      "branches": {
+        "properties": {
+          "title" : "{branch} properties",
+          "status": "Status",
+          "repotype": "Repository type",
+          "branch-name" : "Branch name",
+          "branch-tip": "Branch name to inspect on repository",
+          "credentials": "Credentials:",
+          "location": "URL or location:",
+          "location-tip": "Remote or server URL or location",
+          "ticket-url": "Issue management system URL:",
+          "ticket-url-tip": "Issue management tool URL. \"$1\" will be replaced by the ticket number extracted from commit comment.",
+          "regex": "Identifier extraction regex:",
+          "regex-tip": "Regex to be applied on comments to extract identifiers. Capture group is mandatory.",
+          "tag-regex": "Version tag regex:",
+          "tag-regex-type": "Regex to be matched so tags can be seen as branch versions."
+
+        },
+        "title": "Client branches:",
+        "titlecount": "{count, plural, =0 {Client branch (none):} one {Client branch (#):} other {Client branches (#):}}",
+        "unknown": "Unknown",
+        "add": "Register a new branch&hellip;"
+      },
+      "versions": {
+          "title": "Versions/tags:",
+          "titlecount" : "{count, plural, =0 {Version/tag (none):} one {Version/tag (#):} other {Versions/tags (#):}}",
+          "search" : {
+              "magnifier": "Magnifier",
+              "placeholder" : "Search for commit",
+              "filter-on" : "Filter on",
+              "author" : "Author",
+              "message" : "Message",
+              "id" : "Identifier"
+          }
+      },
+      "commits": {
+          "title": "Commits",
+          "titlecount" : "{count, plural, =0 {Commit (none):} one {Commit (#):} other {Commits (#):}}",
+          "status" : {
+              "processed": "Successfully processed",
+              "nomatch": "No match found",
+              "notprocessed": "Not processed yet"
+          },
+          "commit-panel": {
+              "title": "Commit",
+              "sha": "SHA",
+              "author": "Author",
+              "version": "Version",
+              "commit-date": "Commit date",
+              "message": "Message",
+              "reference": "Reference commit",
+              "set-ref": "Set this commit as reference:",
+              "comment-input": "Comment:",
+              "set-ref-button": "Set as reference",
+              "comment-label": "Comment",
+              "changesets": {
+                  "title": "Changesets",
+                  "edit": "Edit commit changesets",
+                  "none-parenthesis": "(No associated changeset)",
+                  "formtitle": "Please select changesets to be associated to this commit:",
+                  "new": "New changeset",
+                  "validate": "Validate changesets"
+              },
+              "context-menu": {
+                "delete": "Delete reference",
+                "delete-confirm": "Commit reference was successfully deleted"
+              },
+              "last-search": "Last search on",
+              "notprocessed": "Not processed yet",
+              "reports": "{count, plural, =0 {Detected reports (none)} one {Detected report (#):} other {Detected reports (#):}}",
+              "nomatch": "No report found"
+          }
+      }
+    },
+    "reporting": {
+      "no-changeset": "Please select a changeset in the list above"
+    },
+    "eventlog": {
+      "no-project": "Please select a project in the list above",
+      "no-project-selected": "(No project selected)",
+      "title": "event log"
+    }
+  }
+}

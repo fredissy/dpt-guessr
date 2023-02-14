@@ -1,0 +1,22 @@
+{
+    "departements" : [
+        {
+            "nom": "Ain",
+            "lat": "xxx",
+            "long": "yyy",
+            "png": "dep_01.svg"
+        },
+        {
+            "nom": "Aisne",
+            "lat": "xxx",
+            "long": "yyy",
+            "png": "dep_02.svg"
+        },
+        {
+            "nom": "Allier",
+            "lat": "xxx",
+            "long": "yyy",
+            "png": "dep_03.svg"
+        }
+    ]
+}

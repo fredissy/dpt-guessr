@@ -1,0 +1,164 @@
+{
+  "app": {
+    "title": "Sunshine",
+    "general": {
+      "menu": "Menu",
+      "error": "Erreur",
+      "close": "Fermer",
+      "link": "Link",
+      "cancel": "Annuler",
+      "save": "Sauvegarder"
+    },
+    "subtitle": {
+      "search-results": "Résultats de recherche : {term}"
+    },
+    "login": {
+      "forbidden": "Accès interdit 🤕",
+      "connect": "Accéder à la page de connexion",
+      "title": "Bienvenue sur Sunshine☀️​😎",
+      "success": "Connexion réussie !",
+      "subtitle": "Saisissez vos informations de connexion",
+      "login": "Identifiant",
+      "login-placeholder" : "Votre identifiant",
+      "password": "Mot de passe",
+      "password-placeholder": "Votre mot de passe"
+    },
+    "tabs" : {
+      "branches": "Branches",
+      "reporting": "Reporting"
+    },
+    "navbar": {
+      "usermenu": {
+        "profile": "Profil",
+        "logout": "Déconnexion"
+      },
+      "projectmenu": {
+        "header": "{count, plural, =0 {Projet (aucun)} one {Projet (#)} other {Projets (#)}}",
+        "add-project": "Ajouter un projet &hellip;",
+        "refresh": "Rafraîchir la liste des projets",
+        "confirm": "La liste des projets a été rafraîchie"
+      },
+      "changesets": "Changesets",
+      "tools": "Outils",
+      "toolsmenu": {
+        "credentials": "Identifiants",
+        "eventlog": "Journal des traitements",
+        "users": "Utilisateurs et équipes"
+      },
+      "reporting-source": "Source reporting",
+      "reportingmenu": {
+        "noproject": "Aucun projet n'est sélectionné",
+        "global-project": "Projet global",
+        "changeset-subtitle": "Changesets ({count})",
+        "nochangeset-1": "Aucun changeset existant :",
+        "nochangeset-2": "Vous pouvez en ajouter un via le formulaire de défintion d'un commit de référence."
+      }
+    },
+    "scmbrowser": {
+      "newproject": {
+        "title": "Ajouter un nouveau projet",
+        "subtitle": "Saisissez ici les caractéristiques du nouveau projet :",
+        "name": "Nom :",
+        "name-tip": "Le nom du projet est libre, et sert à l'identifier de manière unique sur la plateforme.",
+        "version": "Version :",
+        "button": "Ajouter le projet"
+      },
+      "newbranch": {
+        "title": "Référencer une nouvelle branche",
+        "subtitle": "Saisissez ici les informations concernant la branche. Elle doit exister sur le repository cible.",
+        "key": "Key de la branche :",
+        "key-tip": "Identifiant libre, doit être unique sur le projet.",
+        "repotype": "Type de repository :",
+        "url": "URL ou emplacement du repository contenant la banche :",
+        "url-placeholder": "https://github.com/fredissy/sunshine.git",
+        "credentials": "Identifiants de connexion :",
+        "branch-name": "Nom de la branche dans le repository distant :",
+        "branch-name-tip": "Habituellement master ou dev.",
+        "issue-number": "Format des numéros de tickets :",
+        "issue-number-tip": "Regex à appliquer sur les commentaires pour extraire un identifiant.",
+        "button": "Ajouter la branche"
+      },
+      "branches": {
+        "properties": {
+          "title" : "Propriétés {branch}",
+          "status": "Etat",
+          "repotype": "Type de repository",
+          "branch-name" : "Nom de la branche",
+          "branch-tip": "Nom de la branche à inspecter sur le repository",
+          "credentials": "Identifiants de connexion :",
+          "location": "URL ou emplacement :",
+          "location-tip": "URL ou emplacement de la remote ou du serveur distant.",
+          "ticket-url": "URL du système de gestion de tickets :",
+          "ticket-url-tip": "URL de l'outil de suivi de tickets. \"$1\" sera remplacé par le numéro de ticket extrait du commentaire de commit.",
+          "regex": "Regex d'extraction d'identifiant :",
+          "regex-tip": "Regex à appliquer sur les commentaires pour extraire un identifiant. Un groupe de capture est obligatoire.",
+          "tag-regex": "Regex de tag de version :",
+          "tag-regex-type": "Regex à respecter pour que les tags soient considérés comme des versions de la branche."
+
+        },
+        "title": "Branches client :",
+        "titlecount": "Branches clients ({count}) :",
+        "unknown": "Inconnu",
+        "add": "Référencer une nouvelle branche &hellip;"
+      },
+      "versions": {
+        "title": "Versions/tags:",
+        "titlecount" : "{count, plural, =0 {Version/tag (none):} one {Version/tag (#):} other {Versions/tags (#):}}",
+        "search" : {
+            "magnifier": "Loupe",
+            "placeholder" : "Rechercher un commit",
+            "filter-on" : "Filtrer sur",
+            "author" : "Auteur",
+            "message" : "Message",
+            "id" : "Identifiant"
+        }
+      },
+      "commits": {
+        "title": "Commits",
+        "titlecount" : "{count, plural, =0 {Commit (none):} one {Commit (#):} other {Commits (#):}}",
+        "status" : {
+            "processed": "Traité correctement",
+            "nomatch": "Aucune correspondance identifiée",
+            "notprocessed": "Pas encore traité"
+        },
+        "commit-panel": {
+          "title": "Commit",
+          "sha": "SHA",
+          "author": "Auteur",
+          "version": "Version",
+          "commit-date": "Date de commit",
+          "message": "Message",
+          "reference": "Commit de référence",
+          "set-ref": "Marquer ce commit comme référence :",
+          "comment-input": "Commentaire :",
+          "set-ref-button": "Marquer comme référence",
+          "comment-label": "Commentaire",
+          "changesets": {
+              "title": "Changesets",
+              "edit": "Editer les changesets du commit",
+              "none-parenthesis": "(Aucun changeset associé)",
+              "formtitle": "Sélectionnez les changesets auxquels associer ce commit :",
+              "new": "Nouveau changeset",
+              "validate": "Valider les changesets"
+          },
+          "context-menu": {
+            "delete": "Supprimer la référence",
+            "delete-confirm": "La référence de commit a été supprimée avec succès"
+          },
+          "last-search": "Dernière recherche",
+          "notprocessed": "Pas encore recherché",
+          "reports": "{count, plural, =0 {Report détecté (aucun)} one {Report détecté (#) :} other {Reports détectés (#) :}}",
+          "nomatch": "Aucun report détecté"
+        }
+      }
+    },
+    "reporting": {
+      "no-changeset": "Sélectionnez un changeset ci-dessus"
+    },
+    "eventlog": {
+      "no-project": "Sélectionnez un projet ci-dessus",
+      "no-project-selected": "(Aucun projet sélectionné)",
+      "title": "journal des événements"
+    }
+  }
+}
