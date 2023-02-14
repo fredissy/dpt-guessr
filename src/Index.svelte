@@ -6,7 +6,9 @@
     import DepartementAutocomplete from "./DepartementAutocomplete.svelte";
     import { onMount } from "svelte";
     import { chooseDepartementOfDay, computeResult, findDeptByName } from "./services/DepartementService";
-    import DepartementPng from "./DepartementPng.svelte";
+    import DepartementSvg from "./DepartementSvg.svelte";
+    import { propositions, deptForPropositions } from "./services/stores";
+    import Proposition from "./Proposition.svelte";
 
     let searchInput;
     let inputValue;
@@ -35,11 +37,8 @@
         if (inputValue) {
             departements.forEach((departement) => {
                 if (
-                    departement.name
-                        .toLowerCase()
-                        .startsWith(inputValue.toLowerCase())
-                        ||
-                        departement.code.toString().startsWith(inputValue.toLowerCase())
+                    departement.name.toLowerCase().startsWith(inputValue.toLowerCase()) ||
+                    departement.code.toString().startsWith(inputValue.toLowerCase())
                 ) {
                     matches = [
                         ...matches,
@@ -71,26 +70,49 @@
     let departementDuJour;
 
     const handleButtonClick = () => {
-        let deptSuggestion = findDeptByName(inputValue)
-        if(deptSuggestion != null) {
-            let [victory, distance, direction] = computeResult(deptSuggestion, departementDuJour)
-            console.log("distance=" + distance)
-            console.log("arrow=" + direction)
+        let deptSuggestion = findDeptByName(inputValue);
+        if (deptSuggestion != null) {
+            let [victory, distance, direction] = computeResult(deptSuggestion, departementDuJour);
+            // console.log("distance=" + distance)
+            // console.log("arrow=" + direction)
+            let tmp = $propositions;
+            let proposition = {};
+            proposition.number = tmp.length + 1;
+            proposition.value = deptSuggestion.name;
+            proposition.distance = distance;
+            proposition.victory = victory;
+            proposition.arrow = direction;
+            tmp.push(proposition);
+            propositions.set(tmp);
         }
-    }
-
+    };
 
     onMount(async () => {
         departementDuJour = chooseDepartementOfDay();
         console.log(departementDuJour);
+
+        // reset si département du jour a changé :
+        if (
+            $deptForPropositions &&
+            $deptForPropositions.code != departementDuJour.code
+        ) {
+            console.log("Appel reset dept du jour et propositions");
+            deptForPropositions.set(departementDuJour);
+            propositions.set([]);
+        }
     });
 </script>
 
 <svelte:window on:keydown={navigateList} />
 
 {#if departementDuJour}
-    <DepartementPng img={departementDuJour.svg} />
+    <DepartementSvg img={departementDuJour.svg} />
 {/if}
+
+{#each $propositions as proposition}
+    <Proposition {proposition} />
+{/each}
+
 <form autocomplete="off">
     <div class="autocomplete">
         <input

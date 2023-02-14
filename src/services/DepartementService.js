@@ -68,7 +68,7 @@ const arrowDirection = (angle) => {
  * 
  * @param {*} dep1 first departement
  * @param {*} dep2 second departement
- * @returns array with [victory(boolean), distance km(int), angle in degrees (int)]
+ * @returns array with [victory(boolean), distance km(int), arrow (string)]
  */
 export const computeResult = (dep1, dep2) => {
     if (dep1.latitude == dep2.latitude && dep1.longitude == dep2.longitude) {
