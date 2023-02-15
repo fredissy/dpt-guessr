@@ -7,7 +7,7 @@
     import { onMount } from "svelte";
     import { chooseDepartementOfDay, computeResult, findDeptByName } from "./services/DepartementService";
     import DepartementSvg from "./DepartementSvg.svelte";
-    import { propositions, deptForPropositions } from "./services/stores";
+    import { propositions, deptDuJour } from "./services/stores";
     import Proposition from "./Proposition.svelte";
 
     let searchInput;
@@ -90,15 +90,21 @@
     onMount(async () => {
         departementDuJour = chooseDepartementOfDay();
         console.log(departementDuJour);
+        console.log($deptDuJour);
 
-        // reset si département du jour a changé :
-        if (
-            $deptForPropositions &&
-            $deptForPropositions.code != departementDuJour.code
-        ) {
-            console.log("Appel reset dept du jour et propositions");
-            deptForPropositions.set(departementDuJour);
+        if (!$deptDuJour) {
+            deptDuJour.set(departementDuJour);
             propositions.set([]);
+        } else {
+            // reset si département du jour a changé :
+            if (
+                $deptDuJour &&
+                $deptDuJour.code != departementDuJour.code
+            ) {
+                console.log("Appel reset dept du jour et propositions");
+                deptDuJour.set(departementDuJour);
+                propositions.set([]);
+            }
         }
     });
 </script>
@@ -124,6 +130,7 @@
             on:input={filterDepartements}
         />
     </div>
+    <input type="submit" on:click|preventDefault={handleButtonClick} />
     {#if filteredDepartements.length > 0}
         <ul id="autocomplete-items-list">
             {#each filteredDepartements as departement}
@@ -136,7 +143,6 @@
             {/each}
         </ul>
     {/if}
-    <input type="submit" on:click|preventDefault={handleButtonClick}/>
 </form>
 
 <style>
