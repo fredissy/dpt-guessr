@@ -767,6 +767,46 @@
             "longitude": 2.131111111,
             "surface": 1253,
             "svg": "dep_95.svg"
+        },
+        {
+            "code": 971,
+            "name": "Guadeloupe",
+            "latitude": 16.25,
+            "longitude": -61.5833,
+            "surface": 1629,
+            "svg": "dep_971.svg"
+        },
+        {
+            "code": 972,
+            "name": "Martinique",
+            "latitude": 14.323,
+            "longitude": -61.018,
+            "surface": 1128,
+            "svg": "dep_972.svg"
+        },
+        {
+            "code": 973,
+            "name": "Guyane",
+            "latitude": 3.661,
+            "longitude": -52.998,
+            "surface": 83846,
+            "svg": "dep_973.svg"
+        },
+        {
+            "code": 974,
+            "name": "La Réunion",
+            "latitude": -21.428,
+            "longitude": 55.536,
+            "surface": 2512,
+            "svg": "dep_974.svg"
+        },
+        {
+            "code": 976,
+            "name": "Mayotte",
+            "latitude": -13.17,
+            "longitude": 45.143,
+            "surface": 376,
+            "svg": "dep_976.svg"
         }
     ]
 }
