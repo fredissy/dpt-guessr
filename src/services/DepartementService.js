@@ -57,6 +57,7 @@ const computeBearing = (lat1, lng1, lat2, lng2) => {
 const arrowDirection = (angle) => {
     let arrows = ["⬆️", "↗️", "➡️", "↘️", "⬇️", "↙️", "⬅️", "↖️"]
     angle += 360 / (arrows.length * 2)
+    angle %= 360
     let index = Math.floor(angle / (360 / arrows.length))
 
     // console.log("arrows["+index+"]=" + arrows[index])
