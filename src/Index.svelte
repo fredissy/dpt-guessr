@@ -120,17 +120,6 @@
 {/each}
 
 <form autocomplete="off">
-    <div class="autocomplete">
-        <input
-            id="departement-input"
-            type="text"
-            placeholder="Nom du département"
-            bind:this={searchInput}
-            bind:value={inputValue}
-            on:input={filterDepartements}
-        />
-    </div>
-    <input type="submit" on:click|preventDefault={handleButtonClick} />
     {#if filteredDepartements.length > 0}
         <ul id="autocomplete-items-list">
             {#each filteredDepartements as departement}
@@ -143,6 +132,18 @@
             {/each}
         </ul>
     {/if}
+    <div class="autocomplete">
+        <input
+            id="departement-input"
+            type="text"
+            placeholder="Nom du département"
+            bind:this={searchInput}
+            bind:value={inputValue}
+            on:input={filterDepartements}
+        />
+    </div>
+    <input type="submit" on:click|preventDefault={handleButtonClick} />
+
 </form>
 
 <style>

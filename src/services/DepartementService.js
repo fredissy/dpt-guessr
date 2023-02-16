@@ -73,7 +73,7 @@ const arrowDirection = (angle) => {
  */
 export const computeResult = (dep1, dep2) => {
     if (dep1.latitude == dep2.latitude && dep1.longitude == dep2.longitude) {
-        return [true, 0, null];
+        return [true, 0, "🎉"];
     } else {
         let distance = computeDistance(dep1.latitude, dep1.longitude, dep2.latitude, dep2.longitude)
         let angle = computeBearing(dep1.latitude, dep1.longitude, dep2.latitude, dep2.longitude)
