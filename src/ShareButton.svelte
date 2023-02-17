@@ -1,5 +1,8 @@
 <script>
-    export let propositions;
+    import seedrandom from "seedrandom"
+
+    export let propositions
+    export let victory
 
     const BEGIN_DATE = new Date(2023, 1, 14); // 1 is February ! Months begin at 0
 
@@ -10,10 +13,20 @@
         return gameNumber;
     };
 
+    export const emojiVictoryLost = () => {
+        let emojiVictory = ["😁", "🤩", "😍", "😎", "🏆", "🥇"]
+        let emojiLost = ["🥴", "😵‍💫", "🥺", "😭", "☠️", "💩"]
+
+        let emojiSet = victory?emojiVictory:emojiLost;
+
+        let random = seedrandom(2+new Date().toLocaleDateString('fr-fr'))
+        let rand = Math.floor(emojiSet.length * random())
+        // console.log("Département du jour=" + departements[rand].name)
+        return emojiSet[rand]
+    }
+
     const share = () => {
-        let content = `Département game #${gameNumber()} (${new Date().toLocaleDateString(
-            "fr-FR"
-        )})\n`;
+        let content = `Département game #${gameNumber()} (${new Date().toLocaleDateString("fr-FR")}) ${emojiVictoryLost()}\n`;
         propositions.forEach((proposition) => {
             content += `${proposition.number} : ${Math.round(
                 proposition.distance

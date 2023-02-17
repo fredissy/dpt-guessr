@@ -82,6 +82,11 @@
 
     let departementDuJour;
 
+    const prepareInput = () => {
+        inputValue = null;
+        document.getElementById("departement-input").focus()
+    }
+
     const handleButtonClick = () => {
         let deptSuggestion = findDeptByName(inputValue);
         if (deptSuggestion != null) {
@@ -98,6 +103,7 @@
             tmp.push(proposition);
             propositions.set(tmp);
             updateVictory()
+            prepareInput()
         }
     };
 
@@ -106,6 +112,7 @@
         // console.log(departementDuJour);
         // console.log($deptDuJour);
         updateVictory()
+
 
         if (!$deptDuJour) {
             deptDuJour.set(departementDuJour);
@@ -121,7 +128,8 @@
                 propositions.set([]);
             }
         }
-    });
+        prepareInput()
+        });
 </script>
 
 <svelte:window on:keydown={navigateList} />
@@ -132,42 +140,41 @@
 {/if}
 <div class="bloc-propositions">
 {#each $propositions as proposition}
-    
-        <Proposition {proposition} />
+    <Proposition {proposition} />
 {/each}
 </div>
 
-{#if victory}
-    <ShareButton propositions={$propositions}/>
+{#if victory || $propositions.length == 5}
+    <ShareButton propositions={$propositions} {victory}/>
 {/if}
 
 {#if $propositions.length < 5 && !victory}
     
-<form autocomplete="off">
-    {#if filteredDepartements.length > 0}
-        <ul id="autocomplete-items-list">
-            {#each filteredDepartements as departement}
-                <DepartementAutocomplete
-                    itemLabel={departement}
-                    on:click={() => {
-                        setInputVal(departement);
-                    }}
-                />
-            {/each}
-        </ul>
-    {/if}
-    <div class="autocomplete">
-        <input
-            id="departement-input"
-            type="text"
-            placeholder="Nom du département"
-            bind:this={searchInput}
-            bind:value={inputValue}
-            on:input={filterDepartements}
-        />
-    </div>
-    <button type="submit" class="button" on:click|preventDefault={handleButtonClick} >Proposer</button>
-</form>
+    <form autocomplete="off">
+        {#if filteredDepartements.length > 0}
+            <ul id="autocomplete-items-list">
+                {#each filteredDepartements as departement}
+                    <DepartementAutocomplete
+                        itemLabel={departement}
+                        on:click={() => {
+                            setInputVal(departement);
+                        }}
+                    />
+                {/each}
+            </ul>
+        {/if}
+        <div class="autocomplete">
+            <input
+                id="departement-input"
+                type="text"
+                placeholder="Nom du département"
+                bind:this={searchInput}
+                bind:value={inputValue}
+                on:input={filterDepartements}
+            />
+        </div>
+        <button type="submit" class="button" on:click|preventDefault={handleButtonClick} >Proposer</button>
+    </form>
 {/if}
 
 
