@@ -6,7 +6,6 @@
     const gameNumber = () => {
         let now = new Date(new Date().toDateString());
         let difference = now.getTime() - BEGIN_DATE.getTime();
-        console.log(difference);
         let gameNumber = difference / (1000 * 3600 * 24);
         return gameNumber;
     };
@@ -30,25 +29,8 @@
 </script>
 
 <button
+class="button"
     on:click={() => {
         share();
     }}>Partager mon résultat</button
 >
-
-<style>
-    button {
-        letter-spacing: 1px;
-        border-style: none;
-        text-shadow: 0 0 0 rgba(0, 0, 0, 0);
-        font-size: 1.125rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        margin: 0.5em 0 auto;
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: center;
-        background-color: #405d27;
-        color: #ffffff;
-        border-radius: 4px;
-    }
-</style>

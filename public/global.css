@@ -17,7 +17,7 @@ main p {
 	color: #428647;
 }
 
-main .button {
+.button {
 	letter-spacing: 1px;
 	border-style: none;
 	text-shadow: 0 0 0 rgba(0, 0, 0, 0);
@@ -30,6 +30,8 @@ main .button {
         color: #ffffff;
 	border-radius: 4px;
 }
+
+
 
 label {
 	display: block;
