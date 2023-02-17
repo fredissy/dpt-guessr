@@ -9,10 +9,12 @@
     import DepartementSvg from "./DepartementSvg.svelte";
     import { propositions, deptDuJour } from "./services/stores";
     import Proposition from "./Proposition.svelte";
+    import ShareButton from "./ShareButton.svelte";
 
     let searchInput;
     let inputValue;
     let hiLiteIndex;
+    let victory = false
 
     let filteredDepartements = [];
 
@@ -34,15 +36,13 @@
         return result;
     };
 
-    const victory = () => {
-        let victory = false
+    const updateVictory = () => {
         $propositions.forEach((proposition) => {
             if(proposition.victory) {
                 victory = true
             }
         })
         console.log("victory ? " + victory)
-        return victory
     }
 
     const filterDepartements = () => {
@@ -97,13 +97,15 @@
             proposition.arrow = direction;
             tmp.push(proposition);
             propositions.set(tmp);
+            updateVictory()
         }
     };
 
     onMount(async () => {
         departementDuJour = chooseDepartementOfDay();
-        console.log(departementDuJour);
-        console.log($deptDuJour);
+        // console.log(departementDuJour);
+        // console.log($deptDuJour);
+        updateVictory()
 
         if (!$deptDuJour) {
             deptDuJour.set(departementDuJour);
@@ -135,7 +137,11 @@
 {/each}
 </div>
 
-{#if $propositions.length < 5 && !victory()}
+{#if victory}
+    <ShareButton propositions={$propositions}/>
+{/if}
+
+{#if $propositions.length < 5 && !victory}
     
 <form autocomplete="off">
     {#if filteredDepartements.length > 0}
@@ -186,27 +192,10 @@
         background-color: #f1f1f1;
         width: 100%;
     }
-    button[type="submit"] {
- 
-	letter-spacing: 1px;
-	border-style: none;
-	text-shadow: 0 0 0 rgba(0, 0, 0, 0);
-	font-size: 1.125rem;
-	font-weight: 600;
-	text-transform: uppercase;
-	margin: 0.5em 0 auto;
-	padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: center;
-	background-color: #405d27;
-        color: #ffffff;
-	border-radius: 4px;
-    width: 50%;
-
-    }
 
     #autocomplete-items-list {
         position: relative;
+        z-index: 1000;
         margin: 0;
         padding: 0;
         top: 0;
