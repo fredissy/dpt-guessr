@@ -1,5 +1,5 @@
 body {
-	background-color: #f9e1b8;
+	background-color: #c1946a;
 	font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -17,7 +17,7 @@ main p {
 	color: #428647;
 }
 
-main button {
+main .button {
 	letter-spacing: 1px;
 	border-style: none;
 	text-shadow: 0 0 0 rgba(0, 0, 0, 0);

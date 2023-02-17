@@ -34,6 +34,17 @@
         return result;
     };
 
+    const victory = () => {
+        let victory = false
+        $propositions.forEach((proposition) => {
+            if(proposition.victory) {
+                victory = true
+            }
+        })
+        console.log("victory ? " + victory)
+        return victory
+    }
+
     const filterDepartements = () => {
         let matches = [];
         if (inputValue) {
@@ -113,14 +124,19 @@
 
 <svelte:window on:keydown={navigateList} />
 
+
 {#if departementDuJour}
     <DepartementSvg img={departementDuJour.svg} />
 {/if}
-
+<div class="bloc-propositions">
 {#each $propositions as proposition}
-    <Proposition {proposition} />
+    
+        <Proposition {proposition} />
 {/each}
+</div>
 
+{#if $propositions.length < 5 && !victory()}
+    
 <form autocomplete="off">
     {#if filteredDepartements.length > 0}
         <ul id="autocomplete-items-list">
@@ -144,16 +160,20 @@
             on:input={filterDepartements}
         />
     </div>
-    <input type="submit" on:click|preventDefault={handleButtonClick} />
-
+    <button type="submit" class="button" on:click|preventDefault={handleButtonClick} >Proposer</button>
 </form>
+{/if}
+
 
 <style>
     div.autocomplete {
         /*the container must be positioned relative:*/
         position: relative;
         display: inline-block;
-        width: 300px;
+        width: 50%;
+    }
+    div.bloc-propositions {
+        margin-bottom: 15px;
     }
     input {
         border: 1px solid transparent;
@@ -166,9 +186,23 @@
         background-color: #f1f1f1;
         width: 100%;
     }
-    input[type="submit"] {
-        background-color: DodgerBlue;
-        color: #fff;
+    button[type="submit"] {
+ 
+	letter-spacing: 1px;
+	border-style: none;
+	text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+	font-size: 1.125rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	margin: 0.5em 0 auto;
+	padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+	background-color: #405d27;
+        color: #ffffff;
+	border-radius: 4px;
+    width: 50%;
+
     }
 
     #autocomplete-items-list {
