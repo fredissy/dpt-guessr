@@ -9,7 +9,8 @@
     import DepartementSvg from "./DepartementSvg.svelte";
     import { propositions, deptDuJour } from "./services/stores";
     import Proposition from "./Proposition.svelte";
-
+    import { init, loop } from "./services/FireworksService";
+    
     let searchInput;
     let inputValue;
     let hiLiteIndex;
