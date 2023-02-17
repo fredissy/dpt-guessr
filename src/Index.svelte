@@ -86,6 +86,11 @@
             proposition.arrow = direction;
             tmp.push(proposition);
             propositions.set(tmp);
+
+            if(victory) {
+                init()
+                loop()
+            }
         }
     };
 

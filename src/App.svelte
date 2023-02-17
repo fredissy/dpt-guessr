@@ -2,13 +2,18 @@
     import Index from "./Index.svelte";
 </script>
 
-<div class="app">
-    <Index />
+<div class="container">
+    <div class="app">
+        <Index />
+    </div>
+    <canvas id="canvas"></canvas>
 </div>
 
 <style>
-    .app {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: cornsilk;
-} -->
-<!-- </style>
+    .container {
+        position: relative;
+    }
+    .app, canvas {
+        position: absolute;
+    }
+</style>
