@@ -16,6 +16,8 @@
 
     let filteredDepartements = [];
 
+    let numberEmojis = ["0️⃣", "1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣" ];
+
     $: if (!inputValue) {
         filteredDepartements = [];
         hiLiteIndex = null;
@@ -77,7 +79,7 @@
             // console.log("arrow=" + direction)
             let tmp = $propositions;
             let proposition = {};
-            proposition.number = tmp.length + 1;
+            proposition.number = numberEmojis[tmp.length + 1];
             proposition.value = deptSuggestion.name;
             proposition.distance = distance;
             proposition.victory = victory;
