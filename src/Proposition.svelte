@@ -1,4 +1,5 @@
 <script>
+    import { arrowDirection } from "./services/DepartementService"
     export let proposition;
 </script>
 
@@ -8,7 +9,11 @@
     {#if proposition.distance > 0}
         : {Math.round(proposition.distance)} km,
     {/if}
-    {proposition.arrow}
+    {#if proposition.victory}
+        🎉
+    {:else}
+        {arrowDirection(proposition.angle)}
+    {/if}
 </div>
 
 <style>

@@ -54,13 +54,11 @@ const computeBearing = (lat1, lng1, lat2, lng2) => {
     return brng;
 }
 
-const arrowDirection = (angle) => {
+export const arrowDirection = (angle) => {
     let arrows = ["⬆️", "↗️", "➡️", "↘️", "⬇️", "↙️", "⬅️", "↖️"]
     angle += 360 / (arrows.length * 2)
     angle %= 360
     let index = Math.floor(angle / (360 / arrows.length))
-
-    // console.log("arrows["+index+"]=" + arrows[index])
     return arrows[index]
 
 }
@@ -69,15 +67,15 @@ const arrowDirection = (angle) => {
  * 
  * @param {*} dep1 first departement
  * @param {*} dep2 second departement
- * @returns array with [victory(boolean), distance km(int), arrow (string)]
+ * @returns array with [victory(boolean), distance km(number), angle(number)]
  */
 export const computeResult = (dep1, dep2) => {
     if (dep1.latitude == dep2.latitude && dep1.longitude == dep2.longitude) {
-        return [true, 0, "🎉"];
+        return [true, 0, null];
     } else {
         let distance = computeDistance(dep1.latitude, dep1.longitude, dep2.latitude, dep2.longitude)
         let angle = computeBearing(dep1.latitude, dep1.longitude, dep2.latitude, dep2.longitude)
-        return [false, distance, arrowDirection(angle)]
+        return [false, distance, angle]
     }
 }
 

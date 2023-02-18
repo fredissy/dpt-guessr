@@ -1,5 +1,6 @@
 <script>
     import seedrandom from "seedrandom"
+    import { arrowDirection } from "./services/DepartementService"
 
     export let propositions
     export let victory
@@ -28,21 +29,30 @@
     const share = () => {
         let content = `Département game #${gameNumber()} (${new Date().toLocaleDateString("fr-FR")}) ${emojiVictoryLost()}\n`;
         propositions.forEach((proposition) => {
-            content += `${proposition.number} : ${Math.round(
-                proposition.distance
-            )} : ${proposition.arrow}\n`;
+            content += `${proposition.number} : `
+            if(proposition.victory) {
+                content += emojiVictoryLost()
+            } else {
+                content += `${Math.round(proposition.distance)} km : ${arrowDirection(proposition.angle)}\n`;
+            }
         });
         content += "\n";
         content += document.URL;
 
-        // console.log(content);
-
-        navigator.clipboard.writeText(content);
+        navigator.clipboard.writeText(content).then(
+            () => {
+                document.getElementById('share-button').firstChild.data='Copié dans le presse-papier !'
+            },
+            () => {
+                document.getElementById('share-button').firstChild.data='Erreur lors de la copie dans le presse-papier'
+            }
+        )
     };
 </script>
 
 <button
 class="button"
+id="share-button"
     on:click={() => {
         share();
     }}>Partager mon résultat</button

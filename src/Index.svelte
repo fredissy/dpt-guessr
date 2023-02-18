@@ -37,12 +37,12 @@
     };
 
     const updateVictory = () => {
+        victory = false
         $propositions.forEach((proposition) => {
             if(proposition.victory) {
                 victory = true
             }
         })
-        console.log("victory ? " + victory)
     }
 
     const filterDepartements = () => {
@@ -50,7 +50,7 @@
         if (inputValue) {
             departements.forEach((departement) => {
                 if (
-                    departement.name.toLowerCase().startsWith(inputValue.toLowerCase()) ||
+                    departement.name.toLowerCase().startsWith(inputValue.toLowerCase().replaceAll(' ', '-')) ||
                     departement.code.toString().startsWith(inputValue.toLowerCase())
                 ) {
                     matches = [
@@ -90,7 +90,7 @@
     const handleButtonClick = () => {
         let deptSuggestion = findDeptByName(inputValue);
         if (deptSuggestion != null) {
-            let [victory, distance, direction] = computeResult(deptSuggestion, departementDuJour);
+            let [victory, distance, angle] = computeResult(deptSuggestion, departementDuJour);
             // console.log("distance=" + distance)
             // console.log("arrow=" + direction)
             let tmp = $propositions;
@@ -99,7 +99,7 @@
             proposition.value = deptSuggestion.name;
             proposition.distance = distance;
             proposition.victory = victory;
-            proposition.arrow = direction;
+            proposition.angle = angle;
             tmp.push(proposition);
             propositions.set(tmp);
             updateVictory()
@@ -109,11 +109,6 @@
 
     onMount(async () => {
         departementDuJour = chooseDepartementOfDay();
-        // console.log(departementDuJour);
-        // console.log($deptDuJour);
-        updateVictory()
-
-
         if (!$deptDuJour) {
             deptDuJour.set(departementDuJour);
             propositions.set([]);
@@ -128,6 +123,7 @@
                 propositions.set([]);
             }
         }
+        updateVictory()
         prepareInput()
         });
 </script>
