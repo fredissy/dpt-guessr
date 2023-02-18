@@ -5,9 +5,9 @@
     import { departements } from "./referentiel/departements.json";
     import DepartementAutocomplete from "./DepartementAutocomplete.svelte";
     import { onMount } from "svelte";
-    import { chooseDepartementOfDay, computeResult, findDeptByName } from "./services/DepartementService";
+    import { chooseDepartementOfDay, computeResult, findDeptByName, MAX_TRIES } from "./services/DepartementService";
     import DepartementSvg from "./DepartementSvg.svelte";
-    import { propositions, deptDuJour } from "./services/stores";
+    import { propositions, deptDuJour, scoreBoard } from "./services/stores";
     import Proposition from "./Proposition.svelte";
     import ShareButton from "./ShareButton.svelte";
 
@@ -15,7 +15,7 @@
     let inputValue;
     let hiLiteIndex;
     let victory = false
-
+   
     let filteredDepartements = [];
 
     let numberEmojis = ["0️⃣", "1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣" ];
@@ -83,8 +83,10 @@
     let departementDuJour;
 
     const prepareInput = () => {
-        inputValue = null;
-        document.getElementById("departement-input").focus()
+        if($propositions.length < 5) {
+            inputValue = null;
+            document.getElementById("departement-input").focus()
+        }
     }
 
     const handleButtonClick = () => {
@@ -104,6 +106,12 @@
             propositions.set(tmp);
             updateVictory()
             prepareInput()
+
+            if(victory) {
+                $scoreBoard[tmp.length-1]++
+            } else if($propositions.length == MAX_TRIES) {
+                $scoreBoard[MAX_TRIES]++
+            }
         }
     };
 
@@ -140,11 +148,11 @@
 {/each}
 </div>
 
-{#if victory || $propositions.length == 5}
+{#if victory || $propositions.length == MAX_TRIES}
     <ShareButton propositions={$propositions} {victory}/>
 {/if}
 
-{#if $propositions.length < 5 && !victory}
+{#if $propositions.length < MAX_TRIES && !victory}
     
     <form autocomplete="off">
         {#if filteredDepartements.length > 0}

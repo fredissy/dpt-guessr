@@ -1,6 +1,8 @@
 import seedrandom from "seedrandom"
 import { departements } from "../referentiel/departements.json"
 
+export const MAX_TRIES = 5
+
 export const chooseDepartementOfDay = () => {
     let random = seedrandom(new Date().toLocaleDateString('fr-fr'))
     let rand = Math.floor(departements.length * random())
@@ -10,9 +12,6 @@ export const chooseDepartementOfDay = () => {
 
 const radians = (n) => {
     return Math.PI * n / 180
-}
-const degrees = (n) => {
-    return n * 180 / Math.PI
 }
 
 /**

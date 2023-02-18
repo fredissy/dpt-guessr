@@ -1,8 +1,10 @@
 import { writable } from "svelte/store";
+import { MAX_TRIES } from "./DepartementService";
 import ls from 'localstorage-slim';
 
 const PROPOSITIONS_KEY = 'propositions-ls'
-const DEPT_DU_JOUR = 'deptDuJour-ls'
+const DEPT_DU_JOUR_KEY = 'deptDuJour-ls'
+const SCORES_KEY = 'scores-ls'
 
 ls.config.encrypt = isProduction
 ls.config.decrypt = isProduction
@@ -16,8 +18,15 @@ propositions.subscribe(val => {
 })
 
 // département du jour
-export const deptDuJour = writable(ls.get(DEPT_DU_JOUR) != null ? ls.get(DEPT_DU_JOUR) : {})
+export const deptDuJour = writable(ls.get(DEPT_DU_JOUR_KEY) != null ? ls.get(DEPT_DU_JOUR_KEY) : {})
 
 deptDuJour.subscribe(val => {
-    ls.set(DEPT_DU_JOUR, val)
+    ls.set(DEPT_DU_JOUR_KEY, val)
+})
+
+// scores :
+export const scoreBoard = writable(ls.get(SCORES_KEY) != null ? ls.get(SCORES_KEY) :new Array(MAX_TRIES + 1).fill(0)) //+1 to store nb of defeats
+
+scoreBoard.subscribe(val => {
+    ls.set(SCORES_KEY, val)
 })
