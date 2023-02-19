@@ -72,7 +72,7 @@
     };
 </script>
 
-{#if navigator.canShare && navigator.canShare()}
+{#if navigator.share }
     <button
     class="button"
     id="share-button"
