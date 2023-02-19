@@ -42,9 +42,10 @@
         return content
     }
     const share = () => {
+        let data = buildShareData()
         let shareData = {
-            title: "Guess département",
-            text: buildShareData(),
+            title: 'Guess département',
+            text: data,
             url: document.URL
         }
 
