@@ -26,7 +26,7 @@
         return emojiSet[rand]
     }
 
-    const share = () => {
+    const buildShareData = () => {
         let content = `Département game #${gameNumber()} (${new Date().toLocaleDateString("fr-FR")}) ${emojiVictoryLost()}\n`;
         propositions.forEach((proposition) => {
             content += `${proposition.number} : `
@@ -39,21 +39,53 @@
         content += "\n";
         content += document.URL;
 
-        navigator.clipboard.writeText(content).then(
+        return content
+    }
+    const share = () => {
+        let shareData = {
+            title: "Guess département",
+            text: buildShareData(),
+            url: document.URL
+        }
+
+        navigator.share(shareData).then(
             () => {
-                document.getElementById('share-button').firstChild.data='Copié dans le presse-papier !'
+                document.getElementById('share-button').firstChild.data='Partagé'
             },
             () => {
-                document.getElementById('share-button').firstChild.data='Erreur lors de la copie dans le presse-papier'
+                document.getElementById('share-button').firstChild.data='Erreur lors de l\'appel du partage'
+            }
+        )
+    }
+
+    const clipboardShare = () => {
+        let content = buildShareData()
+
+        navigator.clipboard.writeText(content).then(
+            () => {
+                document.getElementById('clipboard-button').firstChild.data='Copié dans le presse-papier'
+            },
+            () => {
+                document.getElementById('clipboard-button').firstChild.data='Erreur lors de la copie dans le presse-papier'
             }
         )
     };
 </script>
 
+{#if navigator.canShare && navigator.canShare()}
+    <button
+    class="button"
+    id="share-button"
+        on:click={() => {
+            share();
+        }}>Partager mon résultat</button
+    >   
+{/if}
+
 <button
 class="button"
-id="share-button"
+id="clipboard-button"
     on:click={() => {
-        share();
-    }}>Partager mon résultat</button
+        clipboardShare();
+    }}>Copier</button
 >

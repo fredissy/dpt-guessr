@@ -10,6 +10,7 @@
     import { propositions, deptDuJour, scoreBoard } from "./services/stores";
     import Proposition from "./Proposition.svelte";
     import ShareButton from "./ShareButton.svelte";
+    import Countdown from "./Countdown.svelte";
 
     let searchInput;
     let inputValue;
@@ -149,6 +150,7 @@
 </div>
 
 {#if victory || $propositions.length == MAX_TRIES}
+    <Countdown />
     <ShareButton propositions={$propositions} {victory}/>
 {/if}
 
