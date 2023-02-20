@@ -7,12 +7,14 @@
 <div class="proposition">
     #{proposition.number} : {proposition.value}
     {#if proposition.distance > 0}
-        : {Math.round(proposition.distance)} km,
+        : {Math.round(proposition.distance)} km
     {/if}
     {#if proposition.victory}
-        🎉
+        , Victoire 🎉 !
+    {:else if proposition.failure}
+        , Perdu 😓 !
     {:else}
-        {arrowDirection(proposition.angle)}
+        , {arrowDirection(proposition.angle)}
     {/if}
 </div>
 

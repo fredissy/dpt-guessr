@@ -11,6 +11,9 @@
     import Proposition from "./Proposition.svelte";
     import ShareButton from "./ShareButton.svelte";
     import Countdown from "./Countdown.svelte";
+    import Fa from 'svelte-fa/src/fa.svelte'
+    import { faComment } from '@fortawesome/free-solid-svg-icons'
+
 
     let searchInput;
     let inputValue;
@@ -85,6 +88,7 @@
             proposition.value = deptSuggestion.name;
             proposition.distance = distance;
             proposition.victory = victory;
+            proposition.failure = (!victory && $propositions.length+1 == config.max_tries)
             proposition.angle = angle;
             tmp.push(proposition);
             propositions.set(tmp);
@@ -160,7 +164,10 @@
                 on:input={filterDepartements}
             />
         </div>
-        <button type="submit" class="button" on:click|preventDefault={handleButtonClick} >Proposer</button>
+        <button type="submit" class="button" on:click|preventDefault={handleButtonClick} >
+            Proposer
+            <Fa icon={faComment}/>
+        </button>
     </form>
 {/if}
 

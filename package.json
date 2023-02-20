@@ -22,8 +22,10 @@
     "svelte": "^3.55.1"
   },
   "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.3.0",
     "localstorage-slim": "^2.4.0",
     "seedrandom": "^3.0.5",
-    "sirv-cli": "^2.0.1"
+    "sirv-cli": "^2.0.1",
+    "svelte-fa": "^3.0.3"
   }
 }
