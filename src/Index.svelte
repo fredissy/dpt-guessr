@@ -5,14 +5,16 @@
     import { departements, config } from "./referentiel/departements.json";
     import DepartementAutocomplete from "./DepartementAutocomplete.svelte";
     import { onMount } from "svelte";
-    import { chooseDepartementOfDay, computeResult, findDeptByName } from "./services/DepartementService";
+    import { chooseDepartementOfDay, computeResult, findDeptByName, numberEmojis } from "./services/DepartementService";
     import DepartementSvg from "./DepartementSvg.svelte";
     import { propositions, deptDuJour, scoreBoard } from "./services/stores";
     import Proposition from "./Proposition.svelte";
-    import ShareButton from "./ShareButton.svelte";
+    import ResultButtonBar from "./ResultButtonsBar.svelte";
     import Countdown from "./Countdown.svelte";
     import Fa from 'svelte-fa/src/fa.svelte'
     import { faComment } from '@fortawesome/free-solid-svg-icons'
+    import { Form, Button, ListGroup, Container, Row, Col } from 'sveltestrap'
+
 
 
     let searchInput;
@@ -22,7 +24,7 @@
    
     let filteredDepartements = [];
 
-    let numberEmojis = ["0️⃣", "1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣" ];
+  
 
     $: if (!inputValue) {
         filteredDepartements = [];
@@ -124,25 +126,36 @@
         });
 </script>
 
+<Container>
+    {#if departementDuJour}
+    <Row>
+        <Col>
+            <DepartementSvg img={departementDuJour.svg} />
+        </Col>
+    </Row>
+    {/if}
 
-{#if departementDuJour}
-    <DepartementSvg img={departementDuJour.svg} />
+{#if $propositions && $propositions.length > 0}
+<Row>
+    <Col>
+    <ListGroup>
+        {#each $propositions as proposition}
+            <Proposition {proposition} />
+        {/each}
+    </ListGroup>
+</Col>
+</Row>
 {/if}
-<div class="bloc-propositions">
-{#each $propositions as proposition}
-    <Proposition {proposition} />
-{/each}
-</div>
 
 {#if victory || $propositions.length == config.max_tries}
     <Countdown />
-    <ShareButton propositions={$propositions} {victory}/>
+    <div class="formControls">
+        <ResultButtonBar propositions={$propositions} {victory}/>
+    </div>
 {/if}
 
 {#if $propositions.length < config.max_tries && !victory}
-    
-    <form autocomplete="off">
-        {#if filteredDepartements.length > 0}
+{#if filteredDepartements.length > 0}
             <ul id="autocomplete-items-list">
                 {#each filteredDepartements as departement}
                     <DepartementAutocomplete
@@ -154,22 +167,36 @@
                 {/each}
             </ul>
         {/if}
-        <div class="autocomplete">
-            <input
-                id="departement-input"
-                type="text"
-                placeholder="Nom du département"
-                bind:this={searchInput}
-                bind:value={inputValue}
-                on:input={filterDepartements}
-            />
-        </div>
-        <button type="submit" class="button" on:click|preventDefault={handleButtonClick} >
-            Proposer
-            <Fa icon={faComment}/>
-        </button>
-    </form>
+<Row class="mt-3">
+    <Col>
+        <Form autocomplete="off">
+            <div class="formControls">
+            
+                <div class="autocomplete">
+                     <input
+                     id="departement-input"
+                     type="text"
+                     class="form-control"
+                     placeholder="Nom du département"
+                     bind:this={searchInput}
+                     bind:value={inputValue}
+                     on:input={filterDepartements}
+                 />
+                </div>
+                <Button type="button"
+                        class="button btn btn-secondary"
+                        on:click={(e) => {
+                            e.preventDefault()
+                            handleButtonClick()}} >
+                    Proposer
+                    <Fa icon={faComment}/>
+                </Button>
+            </div>
+        </Form>
+    </Col>
+</Row>
 {/if}
+</Container>
 
 
 <style>
@@ -179,20 +206,17 @@
         display: inline-block;
         width: 50%;
     }
-    div.bloc-propositions {
-        margin-bottom: 15px;
-    }
-    input {
+    /* input {
         border: 1px solid transparent;
         background-color: #f1f1f1;
         padding: 10px;
         font-size: 16px;
         margin: 0;
-    }
-    input[type="text"] {
+    } */
+    /* input[type="text"] {
         background-color: #f1f1f1;
         width: 100%;
-    }
+    } */
 
     #autocomplete-items-list {
         position: relative;
@@ -203,5 +227,17 @@
         width: 297px;
         border: 1px solid #ddd;
         background-color: #ddd;
+    }
+    div.formControls {
+        display: flex;
+        align-items: center;
+    }
+
+    :global(.list-group-item:nth-of-type(odd)) {
+      background-color: #eee;
+    }
+
+    :global(.list-group-item:nth-of-type(even)) {
+      background-color: #fff;
     }
 </style>

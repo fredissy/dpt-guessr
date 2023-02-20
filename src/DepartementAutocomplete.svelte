@@ -22,19 +22,7 @@
     
     li.autocomplete-items:hover {
         /*when hovering an item:*/
-        background-color: #81921f;
+        background-color: #88aadd;
         color: white;
-    }
-
-    li.autocomplete-items:active {
-        /*when navigating through the items using the arrow keys:*/
-        background-color: DodgerBlue !important;
-        color: #ffffff;
-    }
-
-    .autocomplete-active {
-        /*when navigating through the items using the arrow keys:*/
-        background-color: DodgerBlue !important;
-        color: #ffffff;
     }
 </style>

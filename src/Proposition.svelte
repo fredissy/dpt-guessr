@@ -1,14 +1,20 @@
 <script>
     import { arrowDirection } from "./services/DepartementService"
+    import { ListGroupItem } from 'sveltestrap'
     export let proposition;
 </script>
 
 
-<div class="proposition">
+<!-- <div class="proposition"> -->
+    <ListGroupItem>
+        <div class="w-100 justify-content-between">
+            <span>
     #{proposition.number} : {proposition.value}
     {#if proposition.distance > 0}
         : {Math.round(proposition.distance)} km
     {/if}
+</span>
+<span>
     {#if proposition.victory}
         , Victoire 🎉 !
     {:else if proposition.failure}
@@ -16,7 +22,10 @@
     {:else}
         , {arrowDirection(proposition.angle)}
     {/if}
+</span>
 </div>
+</ListGroupItem>
+<!-- </div> -->
 
 <style>
     div.proposition {

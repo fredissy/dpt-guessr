@@ -1,11 +1,12 @@
 <script>
+    import { Image } from 'sveltestrap'
     export let img;
 </script>
 
-<img class="departement-image" src="images/departements/{img}" alt="Departement of the day" />
+<Image class="departement-image mb-3 mt-2" src="images/departements/{img}" alt="Departement of the day" />
 
 <style>
-    img.departement-image {
+    :global(.departement-image) {
         width: 100%;
     }
 </style>

@@ -3,6 +3,7 @@
     import { arrowDirection } from "./services/DepartementService"
     import Fa from 'svelte-fa/src/fa.svelte'
     import { faCopy } from '@fortawesome/free-solid-svg-icons'
+    import { Button } from 'sveltestrap'
 
     export let propositions
     export let victory
@@ -49,7 +50,9 @@
 
         let button = document.getElementById('clipboard-button')
         // on supprime l'icône du bouton copier :
-        button.removeChild(button.firstElementChild)
+        if(button.firstElementChild) {
+            button.removeChild(button.firstElementChild)
+        }
 
         navigator.clipboard.writeText(content).then(
             () => {
@@ -62,11 +65,14 @@
     };
 </script>
 
-<button
-class="button"
-id="clipboard-button"
-    on:click={() => {
-        clipboardShare();
-    }}>
-    Copier <Fa icon={faCopy} />
-</button>
+
+
+        <Button
+        color="success"
+        id="clipboard-button"
+            on:click={() => {
+                clipboardShare();
+            }}>
+            Copier <Fa icon={faCopy} />
+        </Button>
+

@@ -1,8 +1,10 @@
 <script>
     import Index from "./Index.svelte";
+    import { Styles } from 'sveltestrap'
 </script>
 
 <div class="app">
+    <Styles />
     <Index />
 </div>
 
