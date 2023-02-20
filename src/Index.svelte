@@ -13,6 +13,8 @@
     import Countdown from "./Countdown.svelte";
     import Fa from 'svelte-fa/src/fa.svelte'
     import { faComment } from '@fortawesome/free-solid-svg-icons'
+    import { Button, Form, Input } from 'sveltestrap'
+
 
 
     let searchInput;
@@ -27,6 +29,8 @@
     $: if (!inputValue) {
         filteredDepartements = [];
         hiLiteIndex = null;
+    } else {
+        filterDepartements();
     }
 
     const setInputVal = (departementLabel) => {
@@ -124,7 +128,6 @@
         });
 </script>
 
-
 {#if departementDuJour}
     <DepartementSvg img={departementDuJour.svg} />
 {/if}
@@ -141,7 +144,7 @@
 
 {#if $propositions.length < config.max_tries && !victory}
     
-    <form autocomplete="off">
+    <Form autocomplete="off">
         {#if filteredDepartements.length > 0}
             <ul id="autocomplete-items-list">
                 {#each filteredDepartements as departement}
@@ -155,20 +158,22 @@
             </ul>
         {/if}
         <div class="autocomplete">
-            <input
-                id="departement-input"
-                type="text"
-                placeholder="Nom du département"
-                bind:this={searchInput}
-                bind:value={inputValue}
-                on:input={filterDepartements}
-            />
+            <Input id="departement-input"
+            type="text"
+            placeholder="Nom du département"
+            bind:this={searchInput}
+            bind:value={inputValue}
+            ></Input>
+
         </div>
-        <button type="submit" class="button" on:click|preventDefault={handleButtonClick} >
-            Proposer
-            <Fa icon={faComment}/>
-        </button>
-    </form>
+        <Button type="submit" on:click={(event) => {
+            event.preventDefault();
+            handleButtonClick()
+            }}>
+            Proposer <Fa icon={faComment}/>
+        </Button>
+
+    </Form>
 {/if}
 
 
