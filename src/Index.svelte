@@ -5,11 +5,11 @@
     import { departements, config } from "./referentiel/departements.json";
     import DepartementAutocomplete from "./DepartementAutocomplete.svelte";
     import { onMount } from "svelte";
-    import { chooseDepartementOfDay, computeResult, findDeptByName } from "./services/DepartementService";
+    import { chooseDepartementOfDay, computeResult, findDeptByName, numberEmojis } from "./services/DepartementService";
     import DepartementSvg from "./DepartementSvg.svelte";
     import { propositions, deptDuJour, scoreBoard } from "./services/stores";
     import Proposition from "./Proposition.svelte";
-    import ShareButton from "./ShareButton.svelte";
+    import ResultButtonBar from "./ResultButtonsBar.svelte";
     import Countdown from "./Countdown.svelte";
     import Fa from 'svelte-fa/src/fa.svelte'
     import { faComment } from '@fortawesome/free-solid-svg-icons'
@@ -24,7 +24,7 @@
    
     let filteredDepartements = [];
 
-    let numberEmojis = ["0️⃣", "1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣" ];
+  
 
     $: if (!inputValue) {
         filteredDepartements = [];
@@ -150,7 +150,7 @@
 {#if victory || $propositions.length == config.max_tries}
     <Countdown />
     <div class="formControls">
-        <ShareButton propositions={$propositions} {victory}/>
+        <ResultButtonBar propositions={$propositions} {victory}/>
     </div>
 {/if}
 

@@ -65,7 +65,7 @@
     };
 </script>
 
-    <div class="text-center mt-3">
+
 
         <Button
         color="success"
@@ -76,10 +76,3 @@
             Copier <Fa icon={faCopy} />
         </Button>
 
-</div>
-
-<style>
-    .text-center {
-        width: 100%;
-    }
-</style>
