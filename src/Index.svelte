@@ -13,7 +13,7 @@
     import Countdown from "./Countdown.svelte";
     import Fa from 'svelte-fa/src/fa.svelte'
     import { faComment } from '@fortawesome/free-solid-svg-icons'
-    import { Button, Form, Input } from 'sveltestrap'
+    import { Button, Form, Input, ListGroup, Container, Row, Col } from 'sveltestrap'
 
 
 
@@ -128,14 +128,28 @@
         });
 </script>
 
-{#if departementDuJour}
-    <DepartementSvg img={departementDuJour.svg} />
+<Container>
+    {#if departementDuJour}
+    <Row>
+        <Col>
+            <DepartementSvg img={departementDuJour.svg} />
+        </Col>
+    </Row>
+    {/if}
+    {filteredDepartements.length}
+{#if $propositions && $propositions.length > 0}
+<Row>
+    <Col>
+<!-- <div class="bloc-propositions"> -->
+    <ListGroup>
+        {#each $propositions as proposition}
+            <Proposition {proposition} />
+        {/each}
+    </ListGroup>
+</Col>
+</Row>
+<!-- </div> -->
 {/if}
-<div class="bloc-propositions">
-{#each $propositions as proposition}
-    <Proposition {proposition} />
-{/each}
-</div>
 
 {#if victory || $propositions.length == config.max_tries}
     <Countdown />
@@ -143,7 +157,8 @@
 {/if}
 
 {#if $propositions.length < config.max_tries && !victory}
-    
+<Row class="mt-3">
+    <Col>
     <Form autocomplete="off">
         {#if filteredDepartements.length > 0}
             <ul id="autocomplete-items-list">
@@ -174,7 +189,10 @@
         </Button>
 
     </Form>
+    </Col>
+</Row>
 {/if}
+</Container>
 
 
 <style>
