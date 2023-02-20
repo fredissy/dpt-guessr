@@ -13,7 +13,7 @@
     import Countdown from "./Countdown.svelte";
     import Fa from 'svelte-fa/src/fa.svelte'
     import { faComment } from '@fortawesome/free-solid-svg-icons'
-    import { Form, Input, ListGroup, Container, Row, Col } from 'sveltestrap'
+    import { Form, Button, ListGroup, Container, Row, Col } from 'sveltestrap'
 
 
 
@@ -138,7 +138,6 @@
 {#if $propositions && $propositions.length > 0}
 <Row>
     <Col>
-<!-- <div class="bloc-propositions"> -->
     <ListGroup>
         {#each $propositions as proposition}
             <Proposition {proposition} />
@@ -146,7 +145,6 @@
     </ListGroup>
 </Col>
 </Row>
-<!-- </div> -->
 {/if}
 
 {#if victory || $propositions.length == config.max_tries}
@@ -175,19 +173,24 @@
             <div class="formControls">
             
                 <div class="autocomplete">
-                    <Input id="departement-input"
-                    class="form-control"
-                    type="text"
-                    placeholder="Nom du département"
-                    bind:this={searchInput}
-                    bind:value={inputValue}
-                    on:input={filterDepartements} />
-
+                     <input
+                     id="departement-input"
+                     type="text"
+                     class="form-control"
+                     placeholder="Nom du département"
+                     bind:this={searchInput}
+                     bind:value={inputValue}
+                     on:input={filterDepartements}
+                 />
                 </div>
-                <button type="button" class="button btn btn-secondary" on:click|preventDefault={handleButtonClick} >
+                <Button type="button"
+                        class="button btn btn-secondary"
+                        on:click={(e) => {
+                            e.preventDefault()
+                            handleButtonClick()}} >
                     Proposer
                     <Fa icon={faComment}/>
-                </button>
+                </Button>
             </div>
         </Form>
     </Col>
@@ -203,20 +206,17 @@
         display: inline-block;
         width: 50%;
     }
-    div.bloc-propositions {
-        margin-bottom: 15px;
-    }
-    input {
+    /* input {
         border: 1px solid transparent;
         background-color: #f1f1f1;
         padding: 10px;
         font-size: 16px;
         margin: 0;
-    }
-    input[type="text"] {
+    } */
+    /* input[type="text"] {
         background-color: #f1f1f1;
         width: 100%;
-    }
+    } */
 
     #autocomplete-items-list {
         position: relative;
