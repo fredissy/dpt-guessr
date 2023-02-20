@@ -41,23 +41,6 @@
 
         return content
     }
-    const share = () => {
-        let data = buildShareData()
-        let shareData = {
-            title: 'Guess département',
-            text: data,
-            url: document.URL
-        }
-
-        navigator.share(shareData).then(
-            () => {
-                document.getElementById('share-button').firstChild.data='Partagé'
-            },
-            () => {
-                document.getElementById('share-button').firstChild.data='Erreur lors de l\'appel du partage'
-            }
-        )
-    }
 
     const clipboardShare = () => {
         let content = buildShareData()
@@ -73,20 +56,11 @@
     };
 </script>
 
-{#if navigator.share }
-    <button
-    class="button"
-    id="share-button"
-        on:click={() => {
-            share();
-        }}>Partager mon résultat</button
-    >   
-{/if}
-
 <button
 class="button"
 id="clipboard-button"
     on:click={() => {
         clipboardShare();
-    }}>Copier</button
->
+    }}>
+    Copier
+</button>
