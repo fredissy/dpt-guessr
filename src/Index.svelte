@@ -13,7 +13,7 @@
     import Countdown from "./Countdown.svelte";
     import Fa from 'svelte-fa/src/fa.svelte'
     import { faComment } from '@fortawesome/free-solid-svg-icons'
-    import { Button, Form, Input, ListGroup, Container, Row, Col } from 'sveltestrap'
+    import { Form, Input, ListGroup, Container, Row, Col } from 'sveltestrap'
 
 
 
@@ -151,14 +151,13 @@
 
 {#if victory || $propositions.length == config.max_tries}
     <Countdown />
-    <ShareButton propositions={$propositions} {victory}/>
+    <div class="formControls">
+        <ShareButton propositions={$propositions} {victory}/>
+    </div>
 {/if}
 
 {#if $propositions.length < config.max_tries && !victory}
-<Row class="mt-3">
-    <Col>
-    <Form autocomplete="off">
-        {#if filteredDepartements.length > 0}
+{#if filteredDepartements.length > 0}
             <ul id="autocomplete-items-list">
                 {#each filteredDepartements as departement}
                     <DepartementAutocomplete
@@ -170,28 +169,27 @@
                 {/each}
             </ul>
         {/if}
-        <div class="autocomplete">
-            <Input id="departement-input"
-            type="text"
-            placeholder="Nom du département"
-            bind:this={searchInput}
-            bind:value={inputValue}
-            on:input={filterDepartements}
-            ></Input>
+<Row class="mt-3">
+    <Col>
+        <Form autocomplete="off">
+            <div class="formControls">
+            
+                <div class="autocomplete">
+                    <Input id="departement-input"
+                    class="form-control"
+                    type="text"
+                    placeholder="Nom du département"
+                    bind:this={searchInput}
+                    bind:value={inputValue}
+                    on:input={filterDepartements} />
 
-        </div>
-        <button type="submit" class="button btn btn-secondary" on:click|preventDefault={handleButtonClick} >
-            Proposer
-            <Fa icon={faComment}/>
-        </button>
-        <!-- <Button type="submit" on:click={(event) => {
-            event.preventDefault();
-            handleButtonClick()
-            }}>
-            Proposer <Fa icon={faComment}/>
-        </Button> -->
-
-    </Form>
+                </div>
+                <button type="button" class="button btn btn-secondary" on:click|preventDefault={handleButtonClick} >
+                    Proposer
+                    <Fa icon={faComment}/>
+                </button>
+            </div>
+        </Form>
     </Col>
 </Row>
 {/if}
@@ -229,5 +227,17 @@
         width: 297px;
         border: 1px solid #ddd;
         background-color: #ddd;
+    }
+    div.formControls {
+        display: flex;
+        align-items: center;
+    }
+
+    :global(.list-group-item:nth-of-type(odd)) {
+      background-color: #eee;
+    }
+
+    :global(.list-group-item:nth-of-type(even)) {
+      background-color: #fff;
     }
 </style>
