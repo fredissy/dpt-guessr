@@ -1,9 +1,8 @@
 <script>
-    export let highlighted;
     export let itemLabel;
 </script>
 
-<li class="autocomplete-items" class:autocomplete-active={highlighted} on:click>
+<li class="autocomplete-items" on:click>
     {@html itemLabel}
 </li>
 

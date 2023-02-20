@@ -64,23 +64,6 @@
         filteredDepartements = matches;
     };
 
-    const navigateList = (e) => {
-        if (
-            e.key === "ArrowDown" &&
-            hiLiteIndex <= filteredCountries.length - 1
-        ) {
-            hiLiteIndex === null ? (hiLiteIndex = 0) : (hiLiteIndex += 1);
-        } else if (e.key === "ArrowUp" && hiLiteIndex !== null) {
-            hiLiteIndex === 0
-                ? (hiLiteIndex = filteredCountries.length - 1)
-                : (hiLiteIndex -= 1);
-        } else if (e.key === "Enter") {
-            setInputVal(filteredCountries[hiLiteIndex]);
-        } else {
-            return;
-        }
-    };
-
     let departementDuJour;
 
     const prepareInput = () => {
@@ -136,8 +119,6 @@
         prepareInput()
         });
 </script>
-
-<svelte:window on:keydown={navigateList} />
 
 
 {#if departementDuJour}
