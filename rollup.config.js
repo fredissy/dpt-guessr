@@ -53,7 +53,8 @@ export default {
 		// 	values: configToReplace,
 		// }),
 		replace({
-			isProduction: production
+			isProduction: production,
+			preventAssignment: true
 			// isProduction: true
 		}),
 		json(),
