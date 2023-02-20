@@ -1,4 +1,7 @@
 {
+    "config": {
+        "max_tries": 5
+    },
     "departements": [
         {
             "code": "01",

@@ -1,5 +1,6 @@
 import { writable } from "svelte/store";
-import { MAX_TRIES } from "./DepartementService";
+import { config } from "../referentiel/departements.json"
+
 import ls from 'localstorage-slim';
 
 const PROPOSITIONS_KEY = 'propositions-ls'
@@ -25,7 +26,7 @@ deptDuJour.subscribe(val => {
 })
 
 // scores :
-export const scoreBoard = writable(ls.get(SCORES_KEY) != null ? ls.get(SCORES_KEY) :new Array(MAX_TRIES + 1).fill(0)) //+1 to store nb of defeats
+export const scoreBoard = writable(ls.get(SCORES_KEY) != null ? ls.get(SCORES_KEY) :new Array(config.max_tries + 1).fill(0)) //+1 to store nb of defeats
 
 scoreBoard.subscribe(val => {
     ls.set(SCORES_KEY, val)

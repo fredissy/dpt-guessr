@@ -2,10 +2,10 @@
     /**
      * https://svelte.dev/repl/5734f123973d4682978427024ca90850?version=3.29.0
      */
-    import { departements } from "./referentiel/departements.json";
+    import { departements, config } from "./referentiel/departements.json";
     import DepartementAutocomplete from "./DepartementAutocomplete.svelte";
     import { onMount } from "svelte";
-    import { chooseDepartementOfDay, computeResult, findDeptByName, MAX_TRIES } from "./services/DepartementService";
+    import { chooseDepartementOfDay, computeResult, findDeptByName } from "./services/DepartementService";
     import DepartementSvg from "./DepartementSvg.svelte";
     import { propositions, deptDuJour, scoreBoard } from "./services/stores";
     import Proposition from "./Proposition.svelte";
@@ -110,8 +110,8 @@
 
             if(victory) {
                 $scoreBoard[tmp.length-1]++
-            } else if($propositions.length == MAX_TRIES) {
-                $scoreBoard[MAX_TRIES]++
+            } else if($propositions.length == config.max_tries) {
+                $scoreBoard[config.max_tries]++
             }
         }
     };
@@ -149,12 +149,12 @@
 {/each}
 </div>
 
-{#if victory || $propositions.length == MAX_TRIES}
+{#if victory || $propositions.length == config.max_tries}
     <Countdown />
     <ShareButton propositions={$propositions} {victory}/>
 {/if}
 
-{#if $propositions.length < MAX_TRIES && !victory}
+{#if $propositions.length < config.max_tries && !victory}
     
     <form autocomplete="off">
         {#if filteredDepartements.length > 0}
