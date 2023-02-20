@@ -29,8 +29,6 @@
     $: if (!inputValue) {
         filteredDepartements = [];
         hiLiteIndex = null;
-    } else {
-        filterDepartements();
     }
 
     const setInputVal = (departementLabel) => {
@@ -136,7 +134,7 @@
         </Col>
     </Row>
     {/if}
-    {filteredDepartements.length}
+
 {#if $propositions && $propositions.length > 0}
 <Row>
     <Col>
@@ -178,15 +176,20 @@
             placeholder="Nom du département"
             bind:this={searchInput}
             bind:value={inputValue}
+            on:input={filterDepartements}
             ></Input>
 
         </div>
-        <Button type="submit" on:click={(event) => {
+        <button type="submit" class="button btn btn-secondary" on:click|preventDefault={handleButtonClick} >
+            Proposer
+            <Fa icon={faComment}/>
+        </button>
+        <!-- <Button type="submit" on:click={(event) => {
             event.preventDefault();
             handleButtonClick()
             }}>
             Proposer <Fa icon={faComment}/>
-        </Button>
+        </Button> -->
 
     </Form>
     </Col>

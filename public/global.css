@@ -25,7 +25,8 @@ main p {
 	font-weight: 600;
 	text-transform: uppercase;
 	margin: 0.5em 0 auto;
-	padding: 12px 84px 12px 83px;
+	margin: auto;
+	padding: 0px 84px 12px 83px;
 	background-color: #428647;
         color: #ffffff;
 	border-radius: 4px;
