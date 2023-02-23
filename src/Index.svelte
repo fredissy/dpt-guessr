@@ -15,15 +15,14 @@
     import { faComment } from '@fortawesome/free-solid-svg-icons'
     import { Form, Button, ListGroup, Container, Row, Col } from 'sveltestrap'
     import HintButton from "./HintButton.svelte";
-
-
+    import Result from "./Result.svelte"
 
     let departementDuJour;
     let searchInput;
     let inputValue;
     let hiLiteIndex;
     let victory = false
-   
+
     let filteredDepartements = [];
 
   
@@ -142,6 +141,9 @@
         {#each $propositions as proposition}
             <Proposition {proposition} />
         {/each}
+        {#if !victory && $propositions.length == config.max_tries}
+            <Result />
+        {/if}
     </ListGroup>
 </Col>
 </Row>
@@ -154,9 +156,7 @@
     </Col>
 </Row>
 {/if}
-{#if !victory && $propositions.length == config.max_tries}
-    <!-- Afficher la bonne réponse ici -->
-{/if}
+
 {#if victory || $propositions.length == config.max_tries}
     <Countdown />
     <div class="formControls">
