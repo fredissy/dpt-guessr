@@ -2,7 +2,7 @@
     import Fa from "svelte-fa/src/fa.svelte";
     import { faLightbulb } from "@fortawesome/free-solid-svg-icons";
     import { Button, Col, Modal, Row } from "sveltestrap";
-    import { propositions } from "./services/stores";
+    import { propositions, deptDuJour } from "./services/stores";
     import { numberEmojis } from "./services/DepartementService"
 
     export let departement
@@ -10,6 +10,15 @@
 
     let isOpen = false;
     const toggle = () => (isOpen = !isOpen);
+    
+
+    const reject = () => {
+        let dept = $deptDuJour
+        dept.hintRejected = true
+        deptDuJour.set(dept)
+        isOpen = false
+        return false
+    }
 
     const hint = () => {
         let tmp = $propositions;
@@ -17,9 +26,10 @@
         proposition.number = numberEmojis[number]
         proposition.hint = true
         proposition.departement = departement
-        tmp.push(proposition);
-        propositions.set(tmp);
-        toggle();
+        tmp.push(proposition)
+        propositions.set(tmp)
+        
+        isOpen = false
     };
 </script>
 <div class="text-center">
@@ -29,7 +39,7 @@
 </div>
 
 
-<Modal body {isOpen} {toggle} header="Indice">
+<Modal body {isOpen} toggle={reject} header="Indice">
     <Row>
     Êtes-vous sûr de vouloir révéler un indice ? Cela comptera comme une tentative
     </Row>
@@ -38,7 +48,7 @@
         <Button on:click={hint}>Oui</Button>
         </Col>
         <Col>
-        <Button on:click={toggle}>Non</Button>
+        <Button on:click={reject}>Non</Button>
     </Col>
     </Row>
 </Modal>

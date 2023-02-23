@@ -1,7 +1,8 @@
 {
     "config": {
         "max_tries": 5,
-        "hint_after": 3
+        "hint_after": 3,
+        "hint_probability": 50
     },
     "departements": [
         {

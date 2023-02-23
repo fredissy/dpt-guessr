@@ -146,7 +146,8 @@
 </Col>
 </Row>
 {/if}
-{#if !victory && $propositions.length == config.hint_after}
+
+{#if !victory && $propositions.length == config.hint_after && !$deptDuJour.hintRejected && $deptDuJour.displayHintButton}
 <Row class="mt-1">
     <Col>
         <HintButton departement={departementDuJour} number={$propositions.length+1}/>

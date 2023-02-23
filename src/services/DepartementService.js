@@ -1,11 +1,20 @@
 import seedrandom from "seedrandom"
-import { departements } from "../referentiel/departements.json"
+import { departements, config } from "../referentiel/departements.json"
 
 export const chooseDepartementOfDay = () => {
     let random = seedrandom(new Date().toLocaleDateString('fr-fr'))
     let rand = Math.floor(departements.length * random())
     // console.log("Département du jour=" + departements[rand].name)
-    return departements[rand]
+    
+    let dept = departements[rand]
+    dept.displayHintButton = displayHintButton(random)
+    return dept
+}
+
+const displayHintButton = (rnd) => {
+    let proba = Math.floor(100*rnd())
+    let displayHintButton = (proba < config.hint_probability)
+    return displayHintButton
 }
 
 const radians = (n) => {
