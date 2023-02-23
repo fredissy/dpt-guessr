@@ -30,13 +30,3 @@
 </ListGroupItem>
 
 {/if}
-
-<style>
-    div.proposition {
-        border: 1px solid #405d27;
-        border-radius: 5px;
-        padding: 3px 3px;
-        margin-bottom: 2px;
-        background-color: #82b74b;
-    }
-</style>
