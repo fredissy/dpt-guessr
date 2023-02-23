@@ -14,9 +14,11 @@
     import Fa from 'svelte-fa/src/fa.svelte'
     import { faComment } from '@fortawesome/free-solid-svg-icons'
     import { Form, Button, ListGroup, Container, Row, Col } from 'sveltestrap'
+    import HintButton from "./HintButton.svelte";
 
 
 
+    let departementDuJour;
     let searchInput;
     let inputValue;
     let hiLiteIndex;
@@ -68,8 +70,6 @@
         }
         filteredDepartements = matches;
     };
-
-    let departementDuJour;
 
     const prepareInput = () => {
         if($propositions.length < 5) {
@@ -146,7 +146,16 @@
 </Col>
 </Row>
 {/if}
-
+{#if !victory && $propositions.length == config.hint_after}
+<Row class="mt-1">
+    <Col>
+        <HintButton departement={departementDuJour} number={$propositions.length+1}/>
+    </Col>
+</Row>
+{/if}
+{#if !victory && $propositions.length == config.max_tries}
+    <!-- Afficher la bonne réponse ici -->
+{/if}
 {#if victory || $propositions.length == config.max_tries}
     <Countdown />
     <div class="formControls">
@@ -156,17 +165,21 @@
 
 {#if $propositions.length < config.max_tries && !victory}
 {#if filteredDepartements.length > 0}
-            <ul id="autocomplete-items-list">
-                {#each filteredDepartements as departement}
-                    <DepartementAutocomplete
-                        itemLabel={departement}
-                        on:click={() => {
-                            setInputVal(departement);
-                        }}
-                    />
-                {/each}
-            </ul>
-        {/if}
+    <ul id="autocomplete-items-list">
+        {#each filteredDepartements as departement, i}
+        <!-- {#if i == config.hint_after }
+            <Hint departement={departementDuJour} />
+        {:else} -->
+            <DepartementAutocomplete
+                itemLabel={departement}
+                on:click={() => {
+                    setInputVal(departement);
+                }}
+            />
+        <!-- {/if} -->
+        {/each}
+    </ul>
+{/if}
 <Row class="mt-3">
     <Col>
         <Form autocomplete="off">
@@ -201,22 +214,10 @@
 
 <style>
     div.autocomplete {
-        /*the container must be positioned relative:*/
         position: relative;
         display: inline-block;
         width: 50%;
     }
-    /* input {
-        border: 1px solid transparent;
-        background-color: #f1f1f1;
-        padding: 10px;
-        font-size: 16px;
-        margin: 0;
-    } */
-    /* input[type="text"] {
-        background-color: #f1f1f1;
-        width: 100%;
-    } */
 
     #autocomplete-items-list {
         position: relative;

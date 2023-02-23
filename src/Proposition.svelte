@@ -1,11 +1,14 @@
 <script>
     import { arrowDirection } from "./services/DepartementService"
     import { ListGroupItem } from 'sveltestrap'
+    import Hint from "./Hint.svelte";
     export let proposition;
 </script>
 
 
-<!-- <div class="proposition"> -->
+{#if proposition.hint}
+    <Hint departement={proposition.departement} number={proposition.number}></Hint>
+{:else}
     <ListGroupItem>
         <div class="w-100 justify-content-between">
             <span>
@@ -25,7 +28,8 @@
 </span>
 </div>
 </ListGroupItem>
-<!-- </div> -->
+
+{/if}
 
 <style>
     div.proposition {

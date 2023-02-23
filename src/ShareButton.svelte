@@ -32,11 +32,15 @@
     const buildShareData = () => {
         let content = `Département game #${gameNumber()} (${new Date().toLocaleDateString("fr-FR")}) ${emojiVictoryLost()}\n`;
         propositions.forEach((proposition) => {
-            content += `${proposition.number} : `
-            if(proposition.victory) {
-                content += emojiVictoryLost()
+            if(proposition.hint) {
+                content += `${proposition.number} : 💡 Indice révélé\n`
             } else {
-                content += `${Math.round(proposition.distance)} km : ${arrowDirection(proposition.angle)}\n`;
+                content += `${proposition.number} : `
+                if(proposition.victory) {
+                    content += `${emojiVictoryLost()} Victoire`
+                } else {
+                    content += `${Math.round(proposition.distance)} km : ${arrowDirection(proposition.angle)}\n`;
+                }
             }
         });
         content += "\n";
