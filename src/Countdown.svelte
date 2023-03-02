@@ -3,10 +3,11 @@
     let now = new Date();
     let tomorrow = new Date();
     tomorrow.setHours(24, 0, 0, 0);
-    let diff = Math.floor((tomorrow.getTime() - now.getTime()) / 1000);
+    let tomorrowTIme = tomorrow.getTime()
+    let diff = 0
 
     setInterval(() => {
-        if (diff > 0) diff--;
+        diff = Math.floor((tomorrowTIme - new Date().getTime()) / 1000);
     }, 1000);
 
     $: hours = Math.floor(diff / 3600);
