@@ -1,6 +1,6 @@
 <script>
     import seedrandom from "seedrandom"
-    import { arrowDirection } from "./services/DepartementService"
+    import { arrowDirection, clipboardShare } from "./services/DepartementService"
     import Fa from 'svelte-fa/src/fa.svelte'
     import { faCopy } from '@fortawesome/free-solid-svg-icons'
     import { Button } from 'sveltestrap'
@@ -48,25 +48,6 @@
 
         return content
     }
-
-    const clipboardShare = () => {
-        let content = buildShareData()
-
-        let button = document.getElementById('clipboard-button')
-        // on supprime l'icône du bouton copier :
-        if(button.firstElementChild) {
-            button.removeChild(button.firstElementChild)
-        }
-
-        navigator.clipboard.writeText(content).then(
-            () => {
-                document.getElementById('clipboard-button').firstChild.data='Copié dans le presse-papier'
-            },
-            () => {
-                document.getElementById('clipboard-button').firstChild.data='Erreur lors de la copie dans le presse-papier'
-            }
-        )
-    };
 </script>
 
 
@@ -74,9 +55,7 @@
         <Button
         color="success"
         id="clipboard-button"
-            on:click={() => {
-                clipboardShare();
-            }}>
+            on:click={(e) => {clipboardShare(buildShareData, e.target.id )}}>
             Copier <Fa icon={faCopy} />
         </Button>
 

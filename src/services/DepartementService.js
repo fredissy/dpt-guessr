@@ -94,4 +94,23 @@ export const findDeptByName = (name) => {
     }
 }
 
+export const clipboardShare = (buildShareData, buttonId) => {
+    let content = buildShareData()
+
+    let button = document.getElementById(buttonId)
+    // on supprime l'icône du bouton copier :
+    if(button.firstElementChild) {
+        button.removeChild(button.firstElementChild)
+    }
+
+    navigator.clipboard.writeText(content).then(
+        () => {
+            document.getElementById(buttonId).firstChild.data='Copié dans le presse-papier'
+        },
+        () => {
+            document.getElementById(buttonId).firstChild.data='Erreur lors de la copie dans le presse-papier'
+        }
+    )
+};
+
 export const numberEmojis = ["0️⃣", "1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣" ];
