@@ -11,7 +11,15 @@
     const toggle = () => (isOpen = !isOpen);
 
     const buildShareData = () => {
-        return "Hello world"
+        let content = `Département game stats (${new Date().toLocaleDateString('fr-fr')}):\n`
+        for(let i=0; i < $scoreBoard.length; i++) {
+            if(i < config.max_tries) {
+                content += `${numberEmojis[i]} : ${$scoreBoard[i]}\n`
+            } else if (i == config.max_tries) {
+                content += `☠️ : ${$scoreBoard[i]}`
+            }
+       }
+       return content
     }
 </script>
 
@@ -31,7 +39,7 @@
     <div class="text-center mt-3">
     <Button
         color="success"
-        id="clipboard-button"
+        id="clipboard-scores"
         on:click={(e) => {clipboardShare(buildShareData, e.target.id )}}>
             Copier <Fa icon={faCopy} />
         </Button>
