@@ -22,7 +22,7 @@
     "svelte": "^3.58.0"
   },
   "dependencies": {
-    "@fortawesome/free-solid-svg-icons": "^6.3.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "bootstrap": "^5.2.3",
     "localstorage-slim": "^2.4.0",
     "seedrandom": "^3.0.5",
