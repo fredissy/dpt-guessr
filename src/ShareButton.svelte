@@ -11,9 +11,9 @@
     const BEGIN_DATE = new Date(2023, 1, 14); // 1 is February ! Months begin at 0
 
     const gameNumber = () => {
-        let now = new Date(new Date().toDateString());
-        let difference = now.getTime() - BEGIN_DATE.getTime();
-        let gameNumber = difference / (1000 * 3600 * 24);
+        let now = new Date();
+        let difference =Math.abs(now - BEGIN_DATE)
+        let gameNumber = Math.ceil(difference / (1000 * 3600 * 24));
         return gameNumber;
     };
 
