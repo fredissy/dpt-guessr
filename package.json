@@ -27,7 +27,7 @@
     "localstorage-slim": "^2.4.0",
     "seedrandom": "^3.0.5",
     "sirv-cli": "^2.0.1",
-    "svelte-fa": "^3.0.3",
+    "svelte-fa": "^3.0.4",
     "sveltestrap": "^5.10.0"
   }
 }
